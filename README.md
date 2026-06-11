@@ -67,4 +67,3 @@ npm run dev
 
 This was built for **CSE 462 Final Project** as a proof-of-concept that simple static radio signals can be made interactive through clever software timing rules and signal processing.
 
-See the full project report in the repository for technical details on RF modulation, signal processing pipeline, and protocol implementation.
