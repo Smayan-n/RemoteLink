@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+	font-family: var(--font-mono);
+}
+
+.text-neon-emerald {
+	color: #14c938;
+	text-shadow:
+		0 0 6px rgba(52, 211, 153, 0.75),
+		0 0 18px rgba(52, 211, 153, 0.45),
+		0 0 32px rgba(16, 185, 129, 0.25);
+}
+
+@keyframes radar-sweep {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes repeat-pulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+		border-color: rgb(30 41 59 / 0.8);
+	}
+	50% {
+		box-shadow: 0 0 20px 2px rgba(52, 211, 153, 0.25);
+		border-color: rgba(52, 211, 153, 0.5);
+	}
+}
+
+.animate-radar-sweep {
+	animation: radar-sweep 3s linear infinite;
+	transform-origin: 32px 32px;
+}
+
+.card-repeat-pulse {
+	animation: repeat-pulse 0.6s ease-out;
+}
+
+.card-held {
+	border-color: rgba(52, 211, 153, 0.45) !important;
+	box-shadow: 0 0 14px 1px rgba(52, 211, 153, 0.18);
+}
+
+@keyframes btn-glow {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+		filter: brightness(1);
+	}
+	50% {
+		box-shadow: 0 0 16px 4px rgba(52, 211, 153, 0.55);
+		filter: brightness(1.35);
+	}
+}
+
+.btn-node-active {
+	animation: btn-glow 0.8s ease-out;
+	opacity: 1 !important;
+}
+
+/* ---- D3 force-graph canvas ---- */
+
+.graph-stage {
+	background-image:
+		linear-gradient(rgba(51, 65, 85, 0.18) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(51, 65, 85, 0.18) 1px, transparent 1px);
+	background-size: 32px 32px;
+}
+
+.d3-canvas {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	cursor: grab;
+	touch-action: none;
+	user-select: none;
+}
+
+.d3-canvas:active {
+	cursor: grabbing;
+}
+
+.d3-world {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: 0 0;
+	will-change: transform;
+}
+
+.d3-edges {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: visible;
+	pointer-events: none;
+}
+
+.d3-node {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* translated into place per-tick via transform */
+	will-change: transform;
+}
+
+.d3-node-handle {
+	cursor: grab;
+}
+
+.d3-node-handle:active {
+	cursor: grabbing;
+}
+
+/* edge press animation: dashes flow from remote toward the button */
+@keyframes edge-flow {
+	to {
+		stroke-dashoffset: -24;
+	}
+}
+
+.d3-edge--active {
+	stroke-dasharray: 6 6;
+	animation: edge-flow 0.5s linear infinite;
+}
+
+/* ripple ring emitted from a button when it fires */
+@keyframes node-ping {
+	0% {
+		transform: translate(-50%, -50%) scale(0.85);
+		opacity: 0.7;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(2.4);
+		opacity: 0;
+	}
+}
+
+.d3-ping {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	border-radius: 9999px;
+	pointer-events: none;
+	animation: node-ping 0.8s ease-out forwards;
+}
+
+@keyframes btn-press-pop {
+	0% {
+		transform: scale(1);
+	}
+	35% {
+		transform: scale(1.18);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.btn-press-pop {
+	animation: btn-press-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
