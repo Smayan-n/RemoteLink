@@ -4,7 +4,7 @@ Turn any cheap household radio remote into a programmable wireless controller fo
 
 ## What It Does
 
-RemoteLink captures radio signals from standard 433.92 MHz remotes (like ceiling fan, garage door, or LED light remotes) using a USB software-defined radio (SDR), decodes them in real time, and maps them to custom computer actions—keyboard shortcuts, macros, multi-button combos, or even virtual keyboard input.
+RemoteLink captures radio signals from standard 433.92 MHz remotes using the EV1527 Protocol (like ceiling fan, garage door, or LED light remotes) using a USB software-defined radio (SDR), decodes them in real time, and maps them to custom computer actions—keyboard shortcuts, macros, multi-button combos, or even virtual keyboard input.
 
 ## Quick Start
 
@@ -28,7 +28,8 @@ npm install
 
 1. **Start the decoder:**
 ```bash
-python sdr-remote.py
+cd backend
+python main.py
 ```
 
 2. **Start the dashboard:**
